@@ -28,7 +28,7 @@ public class ParkingLot {
     private List<Spot> spotList = new ArrayList<>();
 
     public ParkingLot() {
-       spotList = new ArrayList<>();
+
     }
 
 
