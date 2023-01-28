@@ -35,6 +35,7 @@ public class PaymentServiceImpl implements PaymentService {
         else if(mode.toUpperCase().equals("CASH")){
             payment.setPaymentMode(PaymentMode.CASH);
         }
+        
         else if(mode.toUpperCase().equals("CARD")){
             payment.setPaymentMode(PaymentMode.CARD);
         }
@@ -44,7 +45,8 @@ public class PaymentServiceImpl implements PaymentService {
         
         payment.setReservation(reservation);
         payment.setPaymentCompleted(Boolean.TRUE);
-        paymentRepository2.save(payment);
+        //paymentRepository2.save(payment);
+        reservationRepository2.save(reservation);
 
         return payment;
 
