@@ -63,6 +63,7 @@ public class ReservationServiceImpl implements ReservationService {
          
          spot.setOccupied(Boolean.TRUE);
          Payment payment = new Payment();
+         payment.setPaymentCompleted(Boolean.FALSE);
 
          reservation.setNumberOfHours(timeInHours);
          reservation.setSpot(spot);
@@ -76,6 +77,7 @@ public class ReservationServiceImpl implements ReservationService {
          parkingLotRepository3.save(parkingLot);
 
          spotRepository3.save(spot);
+         reservationRepository3.save(reservation);
 
 
       return reservation;
