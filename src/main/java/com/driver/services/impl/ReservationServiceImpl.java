@@ -31,7 +31,7 @@ public class ReservationServiceImpl implements ReservationService {
         throw new Exception("Cannot make reservation");
       }
 
-      List<Spot> spots = parkingLot.getSpot();
+      List<Spot> spots = parkingLot.getSpotList();
       Spot spot = null;
       for(Spot spot1: spots){
          if(spot1.getSpotType()==SpotType.TWO_WHEELER){
@@ -68,10 +68,10 @@ public class ReservationServiceImpl implements ReservationService {
          reservation.setUser(user);
          reservation.setPayment(payment);
 
-         user.getReservation().add(reservation);
+         user.getReservationList().add(reservation);
          userRepository3.save(user);
 
-         parkingLot.getSpot().add(spot);
+         parkingLot.getSpotList().add(spot);
          parkingLotRepository3.save(parkingLot);
 
 

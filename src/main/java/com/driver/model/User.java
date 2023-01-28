@@ -64,11 +64,11 @@ public class User {
         this.password = password;
     }
 
-    public List<Reservation> getReservation() {
+    public List<Reservation> getReservationList() {
         return reservationList;
     }
 
-    public void setReservation(List<Reservation> reservationList) {
+    public void setReservationList(List<Reservation> reservationList) {
         this.reservationList = reservationList;
     }
 

@@ -25,7 +25,7 @@ public class ParkingLot {
     
     @OneToMany(mappedBy = "parkingLot",cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Spot> spot = new ArrayList<>();
+    private List<Spot> spotList = new ArrayList<>();
 
     public ParkingLot() {
     }
@@ -54,12 +54,12 @@ public class ParkingLot {
         this.address = address;
     }
 
-    public List<Spot> getSpot() {
-        return spot;
+    public List<Spot> getSpotList() {
+        return spotList;
     }
 
-    public void setSpot(List<Spot> spot) {
-        this.spot = spot;
+    public void setSpotList(List<Spot> spotList) {
+        this.spotList = spotList;
     }
 
     
