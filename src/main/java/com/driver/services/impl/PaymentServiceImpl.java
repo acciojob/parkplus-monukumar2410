@@ -43,7 +43,7 @@ public class PaymentServiceImpl implements PaymentService {
         else{
             throw new Exception("Payment mode not detected");
         }
-
+        
         payment.setReservation(reservation);
         //payment.setPaymentCompleted(Boolean.TRUE);
         paymentRepository2.save(payment);
