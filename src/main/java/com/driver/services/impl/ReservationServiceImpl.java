@@ -23,6 +23,58 @@ public class ReservationServiceImpl implements ReservationService {
     ParkingLotRepository parkingLotRepository3;
     @Override
     public Reservation reserveSpot(Integer userId, Integer parkingLotId, Integer timeInHours, Integer numberOfWheels) throws Exception {
+      Reservation reservation = new Reservation();
+      ParkingLot parkingLot = parkingLotRepository3.findById(parkingLotId).get();
+      User user = userRepository3.findById(userId).get();
 
+      if(user == null || parkingLot == null){
+        throw new Exception("Cannot make reservation");
+      }
+
+      List<Spot> spots = parkingLot.getSpot();
+      Spot spot = null;
+      for(Spot spot1: spots){
+         if(spot1.getSpotType()==SpotType.TWO_WHEELER){
+            if(numberOfWheels <= 2 && spot1.getOccupied()==Boolean.FALSE){
+                if(spot==null || spot.getPricePerHour()>spot1.getPricePerHour()){
+                    spot = spot1;
+                }
+            }
+         }
+         else if(spot1.getSpotType()==SpotType.FOUR_WHEELER){
+            if(numberOfWheels <= 4 && spot1.getOccupied()==Boolean.FALSE){
+                if(spot==null || spot.getPricePerHour()>spot1.getPricePerHour()){
+                    spot = spot1;
+                }
+            }
+         }
+         else 
+            if(spot1.getOccupied()==Boolean.FALSE){
+                if(spot==null || spot.getPricePerHour()>spot1.getPricePerHour()){
+                    spot = spot1;
+                }
+            }
+         }
+
+         if(spot==null){
+            throw new Exception("Cannot make reservation");
+         }
+         
+         spot.setOccupied(Boolean.TRUE);
+         Payment payment = new Payment();
+
+         reservation.setNumberOfHours(timeInHours);
+         reservation.setSpot(spot);
+         reservation.setUser(user);
+         reservation.setPayment(payment);
+
+         user.getReservation().add(reservation);
+         userRepository3.save(user);
+
+         parkingLot.getSpot().add(spot);
+         parkingLotRepository3.save(parkingLot);
+
+
+      return reservation;
     }
 }
