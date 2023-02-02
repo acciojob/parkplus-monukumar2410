@@ -22,9 +22,7 @@ public class PaymentServiceImpl implements PaymentService {
         Reservation reservation = reservationRepository2.findById(reservationId).get();
         int bill =reservation.getNumberOfHours()*reservation.getSpot().getPricePerHour();
 
-        if(bill>amountSent){
-            throw new Exception("Insufficient Amount");
-        }
+       
 
 
         Payment payment = reservation.getPayment();
@@ -42,10 +40,13 @@ public class PaymentServiceImpl implements PaymentService {
         else{
             throw new Exception("Payment mode not detected");
         }
-        
+        if(bill>amountSent){
+            throw new Exception("Insufficient Amount");
+        }
+        reservation.setPayment(payment);
         payment.setReservation(reservation);
         payment.setPaymentCompleted(Boolean.TRUE);
-        //paymentRepository2.save(payment);
+        //paymentRepository2.save(payment);n
         reservationRepository2.save(reservation);
 
         return payment;
