@@ -23,7 +23,7 @@ public class ReservationServiceImpl implements ReservationService {
     ParkingLotRepository parkingLotRepository3;
     @Override
     public Reservation reserveSpot(Integer userId, Integer parkingLotId, Integer timeInHours, Integer numberOfWheels) throws Exception {
-
+    try{
     // if(!(parkingLotRepository3.existsById(parkingLotId) && userRepository3.existsById(userId))){
     //     throw new Exception("Cannot make reservation");
     // }
@@ -85,10 +85,10 @@ public class ReservationServiceImpl implements ReservationService {
 
 
         return reservation;
-        // }
-        // catch(Exception e){
-        //     return null;
-        
+        }
+        catch(Exception e){
+            return null;
+        }
         
     }
 }
